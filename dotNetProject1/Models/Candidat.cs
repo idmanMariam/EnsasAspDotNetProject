@@ -11,22 +11,48 @@ namespace dotNetProject1.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Candidat
     {
         public int id { get; set; }
+        [Required]
+
         public string nom { get; set; }
+        [Required]
+
         public string prnom { get; set; }
+
         public Nullable<System.DateTime> date_naissance { get; set; }
+
         public string lieu_naissance { get; set; }
+
         public string adresse { get; set; }
+        [Required]
+
         public string nationalite { get; set; }
+    
+
         public string ville { get; set; }
+     
+
         public string tel { get; set; }
+     
+
         public string fix { get; set; }
+       [Required]
+
         public string cin { get; set; }
+
+     [Required]
+       [RegularExpression(@"\A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\Z",
+        ErrorMessage = "Please enter correct email address")]
         public string email { get; set; }
+
+        [Required]
         public string password { get; set; }
+[Compare("password")]
+        public string password2 { get; set; }
         public string cne { get; set; }
         public string type_bac { get; set; }
         public string annee_bac { get; set; }
@@ -37,6 +63,7 @@ namespace dotNetProject1.Models
         public Nullable<bool> redouble_1ere_annee { get; set; }
         public Nullable<bool> redouble_2eme_annee { get; set; }
         public Nullable<bool> redouble_3eme_annee { get; set; }
+        
         public Nullable<double> note_S1 { get; set; }
         public Nullable<double> note_S2 { get; set; }
         public Nullable<double> note_S3 { get; set; }
@@ -49,5 +76,75 @@ namespace dotNetProject1.Models
         public Nullable<int> score { get; set; }
         public Nullable<double> note_concour { get; set; }
         public string filiere_choisie { get; set; }
+        public Candidat()
+        {
+        }
+
+        public Candidat(string nom, string type_bac, double? note_S1, byte[] photo_identite)
+        {
+            this.nom = nom;
+            this.type_bac = type_bac;
+            this.note_S1 = note_S1;
+            this.photo_identite = photo_identite;
+        }
+
+        public Candidat(string cne, string type_bac, string annee_bac, string mention_bac, string diplome, string ecole, string ville_ecole, byte[] scan_bac, byte[] scan_diplome, string filiere_choisie)
+        {
+            this.cne = cne;
+            this.type_bac = type_bac;
+            this.annee_bac = annee_bac;
+            this.mention_bac = mention_bac;
+            this.diplome = diplome;
+            this.ecole = ecole;
+            this.ville_ecole = ville_ecole;
+            this.scan_bac = scan_bac;
+            this.scan_diplome = scan_diplome;
+            this.filiere_choisie = filiere_choisie;
+        }
+
+        public Candidat(string nom, string prnom, DateTime? date_naissance, string lieu_naissance, string adresse, string nationalite, string ville, string tel, string fix, string cin, string email, string password, string password2,string cne, string type_bac, string annee_bac, string mention_bac, string diplome, string ecole, string ville_ecole, bool? redouble_1ere_annee, bool? redouble_2eme_annee, bool? redouble_3eme_annee, double? note_S1, double? note_S2, double? note_S3, double? note_S4, double? note_S5, double? note_S6, byte[] photo_identite, byte[] scan_bac, byte[] scan_diplome, string filiere_choisie)
+        {
+            this.nom = nom;
+            this.prnom = prnom;
+            this.date_naissance = date_naissance;
+            this.lieu_naissance = lieu_naissance;
+            this.adresse = adresse;
+            this.nationalite = nationalite;
+            this.ville = ville;
+            this.tel = tel;
+            this.fix = fix;
+            this.cin = cin;
+            this.email = email;
+            this.password = password;
+            this.password2 = password2;
+
+            this.cne = cne;
+            this.type_bac = type_bac;
+            this.annee_bac = annee_bac;
+            this.mention_bac = mention_bac;
+            this.diplome = diplome;
+            this.ecole = ecole;
+            this.ville_ecole = ville_ecole;
+            this.redouble_1ere_annee = redouble_1ere_annee;
+            this.redouble_2eme_annee = redouble_2eme_annee;
+            this.redouble_3eme_annee = redouble_3eme_annee;
+            this.note_S1 = note_S1;
+            this.note_S2 = note_S2;
+            this.note_S3 = note_S3;
+            this.note_S4 = note_S4;
+            this.note_S5 = note_S5;
+            this.note_S6 = note_S6;
+            this.photo_identite = photo_identite;
+            this.scan_bac = scan_bac;
+            this.scan_diplome = scan_diplome;
+            this.filiere_choisie = filiere_choisie;
+        }
+    }
+    public enum type_bac
+    {
+        Math,
+        technique,
+        pc,
+        svt
     }
 }
